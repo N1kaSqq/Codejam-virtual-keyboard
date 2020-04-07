@@ -9,7 +9,7 @@ const CapsRus = ["Ё", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=
 
 document.querySelector("body").innerHTML = '<textarea readonly> </textarea> <div class="box"></div> <h2>Alt+Shift - сменить язык <h2>Ctrl+X - очистить всё<h2><h2>';
 
-textarea =  document.querySelector("textarea").value;
+
 
 function animation(){
     for(let i= 0; i< 14*100; i=i+100){

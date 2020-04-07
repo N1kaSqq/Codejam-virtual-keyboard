@@ -53,26 +53,52 @@ function draw(KeyArr){
     document.querySelector(".box").innerHTML = out;
 }
 
-draw(KeyArr);
- animation(); 
+
+let LangCheck = localStorage.getItem('key'); 
+
+
+if(LangCheck == "0"){
+    draw(KeyArr);
+    animation(); 
+} else {
+    draw(KeyArrRus);
+    animation(); 
+}
+  
+  
+
+console.log(`начальный лангчек${LangCheck}`);
+
+
+
 let AltCheck = 0;
-let LangCheck = 0;
+ /* let LangCheck = "0";  */
 let flag = false;
 let language = [KeyArr,KeyArrAlt];
 document.addEventListener("keydown", (event)=>{
-    console.log(event.key);
+    
+    console.log(` лангчек при нажатии кнопки  ${LangCheck}`);
     if(event.key=="Alt"){
         flag = true;
     }
     if(event.key=="Shift" && flag){
         flag = false;
         AltCheck = 0;
-        if(LangCheck == 0){
+        if(LangCheck == "0"){
             language = [KeyArrRus,KeyArrRusAlt]; 
-            LangCheck = 1;
+            
+            
+            localStorage.setItem('key', '1');
+            LangCheck = localStorage.getItem('key'); 
+            console.log(` лангчек после нажатии кнопки  ${LangCheck}`);
+        
         } else {
             language = [KeyArr,KeyArrAlt];
-            LangCheck = 0;
+
+           localStorage.setItem('key', '0');
+           LangCheck = localStorage.getItem('key'); 
+           console.log(` лангчек после нажатии кнопки  ${LangCheck}`);
+            
         }
         draw(language[0]);
         animation();
@@ -91,7 +117,7 @@ document.addEventListener("keydown", (event)=>{
 let CapsCheck = 0;
 console.log(CapsCheck);
   document.addEventListener("keydown", (event)=>{
-    if(event.key=="CapsLock" && AltCheck == 0 &&  LangCheck == 0 ){
+    if(event.key=="CapsLock" && AltCheck == 0 &&  LangCheck == "0" ){
        if(CapsCheck==0) {
             draw(Caps);
             animation(); 
@@ -103,7 +129,7 @@ console.log(CapsCheck);
             CapsCheck = 0;
             console.log(CapsCheck);
         }
-    }  else if (event.key=="CapsLock" && AltCheck == 0 && LangCheck == 1 ){
+    }  else if (event.key=="CapsLock" && AltCheck == 0 && LangCheck == "1" ){
         if(CapsCheck==0) {
             draw(CapsRus);
             animation(); 
@@ -237,7 +263,7 @@ document.addEventListener("mousedown", (event)=>{
                 document.querySelector("textarea").value = document.querySelector("textarea").value;
                 break;    
             case "CapsLock" :
-                if(AltCheck == 0 &&  LangCheck == 0 ){
+                if(AltCheck == 0 &&  LangCheck == "0" ){
                     if(CapsCheck==0) {
                          draw(Caps);
                          animation(); 
@@ -249,7 +275,7 @@ document.addEventListener("mousedown", (event)=>{
                          CapsCheck = 0;
                          console.log(CapsCheck);
                      }
-                 }  else if (AltCheck == 0 && LangCheck == 1 ){
+                 }  else if (AltCheck == 0 && LangCheck == "1" ){
                      if(CapsCheck==0) {
                          draw(CapsRus);
                          animation(); 
